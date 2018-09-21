@@ -1,0 +1,3 @@
+<resources>
+    <string name="bl_error_vertical">竖直滚动使用动画实现,因此禁止使用动画</string>
+</resources>

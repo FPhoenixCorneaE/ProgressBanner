@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wkz.progressbanner">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".sample.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".sample.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.simple.RefreshActivity" />
+        <activity android:name=".sample.simple.SimpleActivity" />
+        <activity
+            android:name=".sample.simple.SimpleGuideActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".sample.simple.ImageManagerActivity" />
+        <activity android:name=".sample.simple.TransformerActivity" />
+        <activity android:name=".sample.simple.MethodTestActivity" />
+        <activity android:name=".sample.simple.issues.Issues10Activity" />
+        <activity android:name=".sample.simple.issues.Issues12Activity" />
+        <activity android:name=".sample.simple.SimpleJavaActivity" />
+        <activity android:name=".sample.simple.ProgressActivity"/>
+    </application>
+
+</manifest>
