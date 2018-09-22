@@ -15,13 +15,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.view.animation.LinearInterpolator;
 
-/**
- * 进度条图片
- *
- * @author Wkz
- * @time 2018/09/17
- */
-
 public class ProgressDrawable extends Drawable implements Animatable {
 
     private float mWidth;

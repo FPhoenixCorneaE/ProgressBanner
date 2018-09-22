@@ -16,9 +16,19 @@ import com.wkz.progressbanner.R;
 public class ProgressActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context mContext;
-    private ImageView mProgressIv;
-    private Button mStartBtn;
-    private Button mStopBtn;
+    private ImageView mIvProgress;
+    /**
+     * Start
+     */
+    private Button mBtnStart;
+    /**
+     * Stop
+     */
+    private Button mBtnStop;
+    /**
+     * End
+     */
+    private Button mBtnEnd;
     private ProgressDrawable mProgressDrawable;
 
     @Override
@@ -32,12 +42,10 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
-        mProgressIv = (ImageView) findViewById(R.id.iv_progress);
-
-
-        mProgressIv.setImageDrawable(mProgressDrawable = new ProgressDrawable.Builder(mContext)
-                .setWidth(100f)
-                .setHeight(8f)
+        mIvProgress = (ImageView) findViewById(R.id.iv_progress);
+        mIvProgress.setImageDrawable(mProgressDrawable = new ProgressDrawable.Builder(mContext)
+                .setWidth(300f)
+                .setHeight(4f)
                 .setDuration(3000)
                 .setBackgroundColor(Color.RED)
                 .setProgressColor(Color.GREEN)
@@ -65,22 +73,27 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
                     }
                 })
                 .build());
-        mStartBtn = (Button) findViewById(R.id.btn_start);
-        mStartBtn.setOnClickListener(this);
-        mStopBtn = (Button) findViewById(R.id.btn_stop);
-        mStopBtn.setOnClickListener(this);
+        mBtnStart = (Button) findViewById(R.id.btn_start);
+        mBtnStart.setOnClickListener(this);
+        mBtnStop = (Button) findViewById(R.id.btn_stop);
+        mBtnStop.setOnClickListener(this);
+        mBtnEnd = (Button) findViewById(R.id.btn_end);
+        mBtnEnd.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            default:
+                break;
             case R.id.btn_start:
                 mProgressDrawable.start();
                 break;
             case R.id.btn_stop:
                 mProgressDrawable.stop();
                 break;
-            default:
+            case R.id.btn_end:
+                mProgressDrawable.end();
                 break;
         }
     }

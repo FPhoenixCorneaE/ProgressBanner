@@ -14,9 +14,6 @@ import com.wkz.bannerlayout.animation.VerticalTransformer;
 
 import java.lang.reflect.Field;
 
-/**
- * by y on 2016/10/25
- */
 public class BannerViewPager extends ViewPager {
     private boolean mViewTouchMode;
     private boolean isVertical;

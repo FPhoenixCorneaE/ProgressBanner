@@ -24,11 +24,7 @@ import com.wkz.bannerlayout.animation.ZoomOutPageTransformer;
 import com.wkz.bannerlayout.animation.ZoomOutSlideTransformer;
 import com.wkz.bannerlayout.animation.ZoomOutTranformer;
 import com.wkz.bannerlayout.annotation.AnimationMode;
-import com.wkz.bannerlayout.widget.BannerLayout;
 
-/**
- * by y on 2016/11/11
- */
 public class TransformerUtils {
 
     @NonNull
@@ -36,45 +32,45 @@ public class TransformerUtils {
         @AnimationMode
         int transformerType = type;
         switch (transformerType) {
-            case BannerLayout.ANIMATION_ACCORDION:
+            case AnimationMode.ANIMATION_ACCORDION:
                 return new AccordionTransformer();
-            case BannerLayout.ANIMATION_BACKGROUND:
+            case AnimationMode.ANIMATION_BACKGROUND:
                 return new BackgroundToForegroundTransformer();
-            case BannerLayout.ANIMATION_CUBE_IN:
+            case AnimationMode.ANIMATION_CUBE_IN:
                 return new CubeInTransformer();
-            case BannerLayout.ANIMATION_CUBE_OUT:
+            case AnimationMode.ANIMATION_CUBE_OUT:
                 return new CubeOutTransformer();
-            case BannerLayout.ANIMATION_DEFAULT:
+            case AnimationMode.ANIMATION_DEFAULT:
                 return new DefaultTransformer();
-            case BannerLayout.ANIMATION_DEPTH_PAGE:
+            case AnimationMode.ANIMATION_DEPTH_PAGE:
                 return new DepthPageTransformer();
-            case BannerLayout.ANIMATION_DRAWER:
+            case AnimationMode.ANIMATION_DRAWER:
                 return new DrawerTransformer();
-            case BannerLayout.ANIMATION_FLIPHORIZONTAL:
+            case AnimationMode.ANIMATION_FLIPHORIZONTAL:
                 return new FlipHorizontalTransformer();
-            case BannerLayout.ANIMATION_FLIPVERTICAL:
+            case AnimationMode.ANIMATION_FLIPVERTICAL:
                 return new FlipVerticalTransformer();
-            case BannerLayout.ANIMATION_FOREGROUND:
+            case AnimationMode.ANIMATION_FOREGROUND:
                 return new ForegroundToBackgroundTransformer();
-            case BannerLayout.ANIMATION_ROTATEDOWN:
+            case AnimationMode.ANIMATION_ROTATEDOWN:
                 return new RotateDownTransformer();
-            case BannerLayout.ANIMATION_ROTATEUP:
+            case AnimationMode.ANIMATION_ROTATEUP:
                 return new RotateUpTransformer();
-            case BannerLayout.ANIMATION_SCALEINOUT:
+            case AnimationMode.ANIMATION_SCALEINOUT:
                 return new ScaleInOutTransformer();
-            case BannerLayout.ANIMATION_STACK:
+            case AnimationMode.ANIMATION_STACK:
                 return new StackTransformer();
-            case BannerLayout.ANIMATION_TABLET:
+            case AnimationMode.ANIMATION_TABLET:
                 return new TabletTransformer();
-            case BannerLayout.ANIMATION_VERTICAL:
+            case AnimationMode.ANIMATION_VERTICAL:
                 return new VerticalTransformer();
-            case BannerLayout.ANIMATION_ZOOMIN:
+            case AnimationMode.ANIMATION_ZOOMIN:
                 return new ZoomInTransformer();
-            case BannerLayout.ANIMATION_ZOOMOUTPAGE:
+            case AnimationMode.ANIMATION_ZOOMOUTPAGE:
                 return new ZoomOutPageTransformer();
-            case BannerLayout.ANIMATION_ZOOMOUTSLIDE:
+            case AnimationMode.ANIMATION_ZOOMOUTSLIDE:
                 return new ZoomOutSlideTransformer();
-            case BannerLayout.ANIMATION_ZOOMOUT:
+            case AnimationMode.ANIMATION_ZOOMOUT:
                 return new ZoomOutTranformer();
             default:
                 return new DefaultTransformer();

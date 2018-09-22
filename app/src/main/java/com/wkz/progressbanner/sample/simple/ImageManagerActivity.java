@@ -22,20 +22,26 @@ public final class ImageManagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_imagemanager);
         View var10001 = this.findViewById(R.id.fresco_banner);
-        this.frescoBanner = (BannerLayout)var10001;
+        this.frescoBanner = (BannerLayout) var10001;
         var10001 = this.findViewById(R.id.imageloader_banner);
-        this.imageLoaderBanner = (BannerLayout)var10001;
+        this.imageLoaderBanner = (BannerLayout) var10001;
         var10001 = this.findViewById(R.id.picasso_banner);
-        this.picassoBanner = (BannerLayout)var10001;
+        this.picassoBanner = (BannerLayout) var10001;
         BannerLayout var10000 = this.frescoBanner;
 
-        var10000.setImageLoaderManager((ImageDisplayManager)(new FrescoImageManager())).initListResources(SimpleData.initModel()).switchBanner(true);
+        var10000.setImageLoaderManager((ImageDisplayManager) (new FrescoImageManager()))
+                .initListResources(SimpleData.initModel())
+                .switchBanner(true);
         var10000 = this.imageLoaderBanner;
 
-        var10000.setImageLoaderManager((ImageDisplayManager)(new ImageLoaderManager())).initListResources(SimpleData.initModel()).switchBanner(false);
+        var10000.setImageLoaderManager((ImageDisplayManager) (new ImageLoaderManager()))
+                .initListResources(SimpleData.initModel())
+                .switchBanner(false);
         var10000 = this.picassoBanner;
 
-        var10000.setImageLoaderManager((ImageDisplayManager)(new PicassoImageManager())).initListResources(SimpleData.initModel()).switchBanner(true);
+        var10000.setImageLoaderManager((ImageDisplayManager) (new PicassoImageManager()))
+                .initListResources(SimpleData.initModel())
+                .switchBanner(true);
     }
 
     protected void onDestroy() {

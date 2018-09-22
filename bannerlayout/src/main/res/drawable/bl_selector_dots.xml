@@ -8,11 +8,11 @@
         </shape>
     </item>
 
-
     <item android:state_enabled="false">
         <shape android:shape="oval">
             <corners android:radius="1dp" />
             <solid android:color="@android:color/white" />
         </shape>
     </item>
+
 </selector>

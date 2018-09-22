@@ -5,9 +5,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.support.annotation.NonNull;
 
-/**
- * by y on 2016/12/28
- */
 public class BannerSelectorUtils {
 
     @NonNull

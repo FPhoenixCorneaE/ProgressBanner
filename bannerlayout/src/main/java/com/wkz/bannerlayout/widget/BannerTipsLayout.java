@@ -3,8 +3,8 @@ package com.wkz.bannerlayout.widget;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MarginLayoutParamsCompat;
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wkz.bannerlayout.annotation.TipsSiteMode;
+import com.wkz.bannerlayout.utils.DisplayUtils;
 
-/**
- * by y on 2016/10/25
- */
 public final class BannerTipsLayout extends RelativeLayout {
 
+    private Context mContext;
     private TextView textView;
     private LinearLayout linearLayout;
     private LinearLayout progressesContainer;
@@ -29,18 +28,23 @@ public final class BannerTipsLayout extends RelativeLayout {
      */
     public void setDots(@NonNull BannerTipsLayout.DotsInterface dotsInterface) {
         this.linearLayout.removeAllViews();
-        int i = 0;
 
-        for (int var3 = dotsInterface.dotsCount(); i < var3; ++i) {
-            View view = new View(this.getContext());
+        for (int i = 0; i < dotsInterface.dotsCount(); ++i) {
+            View view = new View(mContext);
             view.setBackground(dotsInterface.dotsSelector());
             view.setEnabled(i == 0);
-            LayoutParams params = new LayoutParams(dotsInterface.dotsWidth(), dotsInterface.dotsHeight());
-            view.setLayoutParams(params);
-            params.leftMargin = dotsInterface.dotsLeftMargin();
-            params.rightMargin = dotsInterface.dotsRightMargin();
-            this.linearLayout.addView(view);
+
+            MarginLayoutParams marginLayoutParams = new MarginLayoutParams(
+                    DisplayUtils.dp2px(mContext, dotsInterface.dotsWidth()),
+                    DisplayUtils.dp2px(mContext, dotsInterface.dotsHeight()));
+            MarginLayoutParamsCompat.setMarginStart(marginLayoutParams,
+                    DisplayUtils.dp2px(mContext, dotsInterface.dotsLeftMargin()));
+            MarginLayoutParamsCompat.setMarginEnd(marginLayoutParams,
+                    DisplayUtils.dp2px(mContext, dotsInterface.dotsRightMargin()));
+            this.linearLayout.addView(view, marginLayoutParams);
         }
+
+        this.linearLayout.measure(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.CENTER_VERTICAL);
@@ -55,13 +59,17 @@ public final class BannerTipsLayout extends RelativeLayout {
         this.progressesContainer.removeAllViews();
 
         for (int i = 0; i < progressInterface.progressCount(); ++i) {
-            View view = new View(this.getContext());
+            View view = new View(mContext);
             view.setBackground(progressInterface.progressBuilder().build());
-            LayoutParams params = new LayoutParams((int) progressInterface.progressBuilder().getWidth(), (int) progressInterface.progressBuilder().getHeight());
-            view.setLayoutParams(params);
-            params.leftMargin = progressInterface.progressLeftMargin();
-            params.rightMargin = progressInterface.progressRightMargin();
-            this.progressesContainer.addView(view);
+
+            MarginLayoutParams marginLayoutParams = new MarginLayoutParams(
+                    (int) progressInterface.progressBuilder().getWidth(),
+                    (int) progressInterface.progressBuilder().getHeight());
+            MarginLayoutParamsCompat.setMarginStart(marginLayoutParams,
+                    DisplayUtils.dp2px(mContext, progressInterface.progressLeftMargin()));
+            MarginLayoutParamsCompat.setMarginEnd(marginLayoutParams,
+                    DisplayUtils.dp2px(mContext, progressInterface.progressRightMargin()));
+            this.progressesContainer.addView(view, marginLayoutParams);
         }
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -76,16 +84,16 @@ public final class BannerTipsLayout extends RelativeLayout {
         @TipsSiteMode
         int tipsSiteMode = tipsInterface.tipsSite();
         switch (tipsSiteMode) {
-            case BannerLayout.TOP:
+            case TipsSiteMode.TOP:
                 tipsParams.gravity = Gravity.TOP;
-            case BannerLayout.RIGHT:
+            case TipsSiteMode.RIGHT:
             default:
                 tipsParams.gravity = Gravity.END;
                 break;
-            case BannerLayout.BOTTOM:
+            case TipsSiteMode.BOTTOM:
                 tipsParams.gravity = Gravity.BOTTOM;
                 break;
-            case BannerLayout.CENTER:
+            case TipsSiteMode.CENTER:
                 tipsParams.gravity = Gravity.CENTER;
         }
 
@@ -163,25 +171,11 @@ public final class BannerTipsLayout extends RelativeLayout {
 
     public BannerTipsLayout(@NonNull Context context) {
         super(context);
-        this.textView = new TextView(this.getContext());
-        this.linearLayout = new LinearLayout(this.getContext());
-        this.progressesContainer = new LinearLayout(this.getContext());
+        this.mContext = context;
+        this.textView = new TextView(mContext);
+        this.linearLayout = new LinearLayout(mContext);
+        this.progressesContainer = new LinearLayout(mContext);
     }
-
-    public BannerTipsLayout(@NonNull Context context, @NonNull AttributeSet attrs) {
-        super(context, attrs);
-        this.textView = new TextView(this.getContext());
-        this.linearLayout = new LinearLayout(this.getContext());
-        this.progressesContainer = new LinearLayout(this.getContext());
-    }
-
-    public BannerTipsLayout(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        this.textView = new TextView(this.getContext());
-        this.linearLayout = new LinearLayout(this.getContext());
-        this.progressesContainer = new LinearLayout(this.getContext());
-    }
-
 
     public interface TipsInterface {
         boolean showBackgroundColor();
@@ -232,9 +226,9 @@ public final class BannerTipsLayout extends RelativeLayout {
     public interface ProgressInterface {
         int progressCount();
 
-        int progressLeftMargin();
+        float progressLeftMargin();
 
-        int progressRightMargin();
+        float progressRightMargin();
 
         int progressSite();
 

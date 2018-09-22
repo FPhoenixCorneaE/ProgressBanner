@@ -15,9 +15,6 @@ import com.wkz.bannerlayout.listener.OnBannerImageClickListener;
 
 import java.util.List;
 
-/**
- * by y on 2016/10/24.
- */
 public class BannerAdapter extends PagerAdapter {
 
     private ImageDisplayManager imageLoaderManage;

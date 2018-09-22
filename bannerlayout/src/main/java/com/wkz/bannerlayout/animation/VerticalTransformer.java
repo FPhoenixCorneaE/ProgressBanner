@@ -2,11 +2,6 @@ package com.wkz.bannerlayout.animation;
 
 import android.view.View;
 
-/**
- * by y on 2016/12/8.
- * Vertical scroll animation, used with viewpager
- */
-
 public class VerticalTransformer extends BannerTransformer {
 
     @Override

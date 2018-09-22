@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.wkz.progressbanner.R;
 import com.wkz.bannerlayout.listener.OnBannerChangeListener;
 import com.wkz.bannerlayout.widget.BannerLayout;
-import com.wkz.progressbanner.sample.OnSimpleBannerChangeListener;
+import com.wkz.bannerlayout.listener.OnSimpleBannerChangeListener;
 import com.wkz.progressbanner.sample.bean.SimpleData;
 
 import java.util.List;

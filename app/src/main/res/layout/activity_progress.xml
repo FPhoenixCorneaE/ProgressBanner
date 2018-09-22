@@ -27,4 +27,13 @@
         android:layout_alignTop="@+id/btn_start"
         android:layout_marginEnd="54dp"
         android:text="Stop" />
+
+    <Button
+        android:id="@+id/btn_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="52dp"
+        android:text="End" />
 </RelativeLayout>

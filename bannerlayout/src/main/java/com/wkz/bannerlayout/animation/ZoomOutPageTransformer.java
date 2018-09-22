@@ -3,11 +3,6 @@ package com.wkz.bannerlayout.animation;
 import android.annotation.SuppressLint;
 import android.view.View;
 
-/**
- * by y on 2016/11/11
- * google simple
- */
-
 public class ZoomOutPageTransformer extends BannerTransformer {
     private static final float MIN_SCALE = 0.85f;
     private static final float MIN_ALPHA = 0.5f;

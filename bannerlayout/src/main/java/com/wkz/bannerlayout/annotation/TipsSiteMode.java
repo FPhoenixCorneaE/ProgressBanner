@@ -1,21 +1,23 @@
 package com.wkz.bannerlayout.annotation;
 
 import android.support.annotation.IntDef;
-
-import com.wkz.bannerlayout.widget.BannerLayout;
+import android.widget.RelativeLayout;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * by y on 2017/1/19.
- */
 @IntDef({
-        BannerLayout.TOP,
-        BannerLayout.RIGHT,
-        BannerLayout.BOTTOM,
-        BannerLayout.CENTER
+        TipsSiteMode.LEFT,
+        TipsSiteMode.TOP,
+        TipsSiteMode.RIGHT,
+        TipsSiteMode.BOTTOM,
+        TipsSiteMode.CENTER
 })
 @Retention(RetentionPolicy.CLASS)
 public @interface TipsSiteMode {
+    int LEFT = RelativeLayout.ALIGN_PARENT_LEFT;
+    int TOP = RelativeLayout.ALIGN_PARENT_TOP;
+    int RIGHT = RelativeLayout.ALIGN_PARENT_RIGHT;
+    int BOTTOM = RelativeLayout.ALIGN_PARENT_BOTTOM;
+    int CENTER = RelativeLayout.CENTER_IN_PARENT;
 }

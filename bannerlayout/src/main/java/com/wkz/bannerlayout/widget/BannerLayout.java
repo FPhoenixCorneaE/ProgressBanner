@@ -14,10 +14,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import com.wkz.bannerlayout.animation.BannerTransformer;
-import com.wkz.bannerlayout.exception.BannerException;
 import com.wkz.bannerlayout.listener.BannerModelCallBack;
 import com.wkz.bannerlayout.listener.ImageDisplayManager;
 import com.wkz.bannerlayout.listener.OnBannerChangeListener;
@@ -31,10 +29,7 @@ import com.wkz.bannerlayout.utils.TransformerUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * by y on 2016/10/24
- */
-public final class BannerLayout extends FrameLayout implements ViewPagerCurrent, ViewPager.OnPageChangeListener, OnBannerImageClickListener, BannerTipsLayout.DotsInterface, BannerTipsLayout.TitleInterface, BannerTipsLayout.TipsInterface, BannerPageView.PageNumViewInterface, BannerTipsLayout.ProgressInterface {
+public final class BannerLayout extends FrameLayout implements ViewPagerCurrent, ViewPager.OnPageChangeListener, OnBannerImageClickListener, BannerTipsLayout.DotsInterface, BannerTipsLayout.TitleInterface, BannerTipsLayout.TipsInterface, BannerPageNumView.PageNumViewInterface, BannerTipsLayout.ProgressInterface {
     private List transformerList;
     private OnBannerClickListener onBannerClickListener;
     private List<BannerModelCallBack> imageList;
@@ -43,23 +38,23 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
     private BannerTipsLayout bannerTipLayout;
     private ImageDisplayManager imageLoaderManage;
     private BannerAdapter adapter;
-    private BannerPageView pageView;
+    private BannerPageNumView pageView;
     private OnBannerChangeListener onBannerChangeListener;
     private BannerTransformer bannerTransformer;
     private int preEnablePosition;
     private boolean isGuide;
+    private boolean isVertical;
     private boolean isStartRotation;
-    private boolean isTipsBackground;
+    private long delayTime;
     private boolean viePagerTouchMode;
+    private int mDuration;
     private int errorImageView;
     private int placeImageView;
-    private int mDuration;
-    private boolean isVertical;
+    private boolean isTipsBackground;
     private boolean isVisibleDots;
     private int dotsWidth;
     private int dotsHeight;
     private int dotsSelector;
-    private long delayTime;
     private int dotsLeftMargin;
     private int dotsRightMargin;
     private int dotsSite;
@@ -68,8 +63,8 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
     private int enabledColor;
     private int normalColor;
     private boolean isVisibleProgresses;
-    private int progressLeftMargin;
-    private int progressRightMargin;
+    private float progressLeftMargin;
+    private float progressRightMargin;
     private int progressSite;
     private ProgressDrawable.Builder progressBuilder;
     private boolean isVisibleTitle;
@@ -100,82 +95,45 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
     private String pageNumViewMark;
     public static final int MATCH_PARENT = FrameLayout.LayoutParams.MATCH_PARENT;
     public static final int WRAP_CONTENT = FrameLayout.LayoutParams.WRAP_CONTENT;
-    /**
-     * animation type
-     */
-    public static final int ANIMATION_ACCORDION = 0;
-    public static final int ANIMATION_BACKGROUND = 1;
-    public static final int ANIMATION_CUBE_IN = 2;
-    public static final int ANIMATION_CUBE_OUT = 3;
-    public static final int ANIMATION_DEFAULT = 4;
-    public static final int ANIMATION_DEPTH_PAGE = 5;
-    public static final int ANIMATION_FLIPHORIZONTAL = 6;
-    public static final int ANIMATION_FLIPVERTICAL = 7;
-    public static final int ANIMATION_FOREGROUND = 8;
-    public static final int ANIMATION_ROTATEDOWN = 9;
-    public static final int ANIMATION_ROTATEUP = 10;
-    public static final int ANIMATION_SCALEINOUT = 11;
-    public static final int ANIMATION_STACK = 12;
-    public static final int ANIMATION_TABLET = 13;
-    public static final int ANIMATION_VERTICAL = 14;
-    public static final int ANIMATION_ZOOMIN = 15;
-    public static final int ANIMATION_ZOOMOUTPAGE = 16;
-    public static final int ANIMATION_ZOOMOUTSLIDE = 17;
-    public static final int ANIMATION_ZOOMOUT = 18;
-    public static final int ANIMATION_DRAWER = 19;
-    /**
-     * pageNumberView site type
-     */
-    public static final int PAGE_NUM_VIEW_TOP_LEFT = 0;
-    public static final int PAGE_NUM_VIEW_TOP_RIGHT = 1;
-    public static final int PAGE_NUM_VIEW_BOTTOM_LEFT = 2;
-    public static final int PAGE_NUM_VIEW_BOTTOM_RIGHT = 3;
-    public static final int PAGE_NUM_VIEW_CENTER_LEFT = 4;
-    public static final int PAGE_NUM_VIEW_CENTER_RIGHT = 5;
-    public static final int PAGE_NUM_VIEW_TOP_CENTER = 6;
-    public static final int PAGE_NUM_VIEW_BOTTOM_CENTER = 7;
-    /**
-     * tipsLayout location marker
-     */
-    public static final int LEFT = 9;
-    public static final int TOP = 10;
-    public static final int RIGHT = 11;
-    public static final int BOTTOM = 12;
-    public static final int CENTER = 13;
 
     private void init() {
         this.isGuide = BannerDefaults.IS_GUIDE;
+        this.isVertical = BannerDefaults.IS_VERTICAL;
+        this.isStartRotation = BannerDefaults.IS_START_ROTATION;
+        this.delayTime = BannerDefaults.DELAY_TIME;
+        this.viePagerTouchMode = BannerDefaults.VIEW_PAGER_TOUCH_MODE;
+        this.mDuration = BannerDefaults.BANNER_DURATION;
+        this.errorImageView = BannerDefaults.GLIDE_ERROR_IMAGE;
+        this.placeImageView = BannerDefaults.GLIDE_PLACE_IMAGE;
+
         this.isTipsBackground = BannerDefaults.IS_TIPS_LAYOUT_BACKGROUND;
         this.tipsBackgroundColor = BannerDefaults.TIPS_LAYOUT_BACKGROUND;
         this.tipsLayoutWidth = BannerDefaults.TIPS_LAYOUT_WIDTH;
         this.tipsLayoutHeight = BannerDefaults.TIPS_LAYOUT_HEIGHT;
+        this.tipsSite = BannerDefaults.TIPS_SITE;
+
         this.isVisibleDots = BannerDefaults.IS_VISIBLE_DOTS;
         this.dotsLeftMargin = BannerDefaults.DOTS_LEFT_MARGIN;
         this.dotsRightMargin = BannerDefaults.DOTS_RIGHT_MARGIN;
         this.dotsWidth = BannerDefaults.DOTS_WIDth;
         this.dotsHeight = BannerDefaults.DOTS_HEIGHT;
         this.dotsSelector = BannerDefaults.DOTS_SELECTOR;
-        this.enabledRadius = BannerDefaults.ENABLED_RADIUS;
-        this.enabledColor = BannerDefaults.ENABLED_COLOR;
-        this.normalRadius = BannerDefaults.NORMAL_RADIUS;
-        this.normalColor = BannerDefaults.NORMAL_COLOR;
-        this.delayTime = BannerDefaults.DELAY_TIME;
-        this.isStartRotation = BannerDefaults.IS_START_ROTATION;
-        this.viePagerTouchMode = BannerDefaults.VIEW_PAGER_TOUCH_MODE;
-        this.errorImageView = BannerDefaults.GLIDE_ERROR_IMAGE;
-        this.placeImageView = BannerDefaults.GLIDE_PLACE_IMAGE;
-        this.mDuration = BannerDefaults.BANNER_DURATION;
-        this.isVertical = BannerDefaults.IS_VERTICAL;
-        this.isVisibleTitle = BannerDefaults.TITLE_VISIBLE;
+        this.enabledRadius = BannerDefaults.DOTS_ENABLED_RADIUS;
+        this.enabledColor = BannerDefaults.DOTS_ENABLED_COLOR;
+        this.normalRadius = BannerDefaults.DOTS_NORMAL_RADIUS;
+        this.normalColor = BannerDefaults.DOTS_NORMAL_COLOR;
+        this.dotsSite = BannerDefaults.DOTS_SITE;
+
+
+        this.isVisibleTitle = BannerDefaults.IS_VISIBLE_TITLE;
         this.titleColor = BannerDefaults.TITLE_COLOR;
         this.titleSize = BannerDefaults.TITLE_SIZE;
         this.titleRightMargin = BannerDefaults.TITLE_RIGHT_MARGIN;
         this.titleLeftMargin = BannerDefaults.TITLE_LEFT_MARGIN;
         this.titleWidth = BannerDefaults.TITLE_WIDTH;
         this.titleHeight = BannerDefaults.TITLE_HEIGHT;
-        this.tipsSite = BannerDefaults.TIPS_SITE;
-        this.dotsSite = BannerDefaults.DOTS_SITE;
         this.titleSite = BannerDefaults.TITLE_SITE;
+
         this.pageNumViewSite = BannerDefaults.PAGE_NUM_VIEW_SITE;
         this.pageNumViewRadius = BannerDefaults.PAGE_NUM_VIEW_RADIUS;
         this.pageNumViewPaddingTop = BannerDefaults.PAGE_NUM_VIEW_PADDING_TOP;
@@ -190,6 +148,13 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
         this.pageNumViewBackgroundColor = BannerDefaults.PAGE_NUM_VIEW_BACKGROUND;
         this.pageNumViewTextSize = BannerDefaults.PAGE_NUM_VIEW_SIZE;
         this.pageNumViewMark = BannerDefaults.PAGE_NUM_VIEW_MARK;
+
+        this.progressLeftMargin = BannerDefaults.PROGRESSES_LEFT_MARGIN;
+        this.progressRightMargin = BannerDefaults.PROGRESSES_RIGHT_MARGIN;
+        this.progressSite = BannerDefaults.PROGRESSES_SITE;
+        this.progressBuilder = new ProgressDrawable.Builder(getContext())
+                .setAnimated(true)
+                .setDuration(this.mDuration);
     }
 
     public void setCurrentItem(int page) {
@@ -292,7 +257,7 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
     @NonNull
     public final BannerLayout initPageNumView() {
         this.clearPageView();
-        this.pageView = new BannerPageView(this.getContext());
+        this.pageView = new BannerPageNumView(this.getContext());
         return this;
     }
 
@@ -498,14 +463,14 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
     }
 
     @NonNull
-    public final BannerLayout setProgressesMargin(int leftMargin, int rightMargin) {
+    public final BannerLayout setProgressesMargin(float leftMargin, float rightMargin) {
         this.progressLeftMargin = leftMargin;
         this.progressRightMargin = rightMargin;
         return this;
     }
 
     @NonNull
-    public final BannerLayout setProgressesMargin(int margin) {
+    public final BannerLayout setProgressesMargin(float margin) {
         this.progressLeftMargin = margin;
         this.progressRightMargin = margin;
         return this;
@@ -525,10 +490,9 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
     @NonNull
     public final BannerLayout setBannerTransformer(@NonNull BannerTransformer bannerTransformer) {
         if (this.isVertical) {
-            String var2 = this.getContext().getResources().getString(
-                    this.getContext().getResources().getIdentifier("bl_error_vertical", "string", this.getContext().getPackageName())
-            );
-            throw new BannerException(var2);
+            //If it is a vertical slide can not set the animation
+            //竖直滚动使用动画实现,因此禁止使用动画
+            throw new RuntimeException("If it is a vertical slide can not set the animation");
         } else {
             this.bannerTransformer = bannerTransformer;
             if (this.viewPager != null) {
@@ -709,11 +673,10 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
             }
 
             if (this.bannerTipLayout != null) {
-                if (this.imageList == null) {
-                    throw new NullPointerException("imageList is null");
+                if (this.imageList != null && !this.imageList.isEmpty()) {
+                    this.bannerTipLayout.setTitle(this.imageList.get(0).getBannerTitle());
                 }
 
-                this.bannerTipLayout.setTitle(this.imageList.get(0).getBannerTitle());
             }
         }
 
@@ -769,12 +732,12 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
     }
 
     @Override
-    public int progressLeftMargin() {
+    public float progressLeftMargin() {
         return this.progressLeftMargin;
     }
 
     @Override
-    public int progressRightMargin() {
+    public float progressRightMargin() {
         return this.progressRightMargin;
     }
 
@@ -785,11 +748,6 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
 
     @Override
     public ProgressDrawable.Builder progressBuilder() {
-        if (this.progressBuilder == null) {
-            this.progressBuilder = new ProgressDrawable.Builder(getContext())
-                    .setAnimated(true)
-                    .setDuration(this.delayTime);
-        }
         return this.progressBuilder;
     }
 
@@ -977,13 +935,8 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
         this.init();
     }
 
-    public BannerLayout(@NonNull Context context, @NonNull AttributeSet attrs) {
+    public BannerLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.init();
-    }
-
-    public BannerLayout(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
         this.init();
     }
 }

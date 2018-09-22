@@ -6,7 +6,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:divider="@drawable/shape_divider"
+        android:orientation="vertical"
+        android:showDividers="middle|beginning|end">
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_simple"

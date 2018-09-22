@@ -2,11 +2,6 @@ package com.wkz.bannerlayout.animation;
 
 import android.view.View;
 
-/**
- * Created by dkzwm on 2017/3/2.
- *
- * @author dkzwm
- */
 public class DrawerTransformer extends ABaseTransformer {
     @Override
     protected void onTransform(View view, float position) {
