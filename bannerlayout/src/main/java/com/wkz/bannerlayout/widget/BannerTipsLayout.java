@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.wkz.bannerlayout.annotation.TipsSiteMode;
+import com.wkz.bannerlayout.annotation.TipsLayoutSiteMode;
 import com.wkz.bannerlayout.utils.DisplayUtils;
 
 public final class BannerTipsLayout extends RelativeLayout {
@@ -81,19 +81,19 @@ public final class BannerTipsLayout extends RelativeLayout {
     @NonNull
     public FrameLayout.LayoutParams setBannerTips(@NonNull BannerTipsLayout.TipsInterface tipsInterface) {
         FrameLayout.LayoutParams tipsParams = new FrameLayout.LayoutParams(tipsInterface.tipsWidth(), tipsInterface.tipsHeight());
-        @TipsSiteMode
+        @TipsLayoutSiteMode
         int tipsSiteMode = tipsInterface.tipsSite();
         switch (tipsSiteMode) {
-            case TipsSiteMode.TOP:
+            case TipsLayoutSiteMode.TOP:
                 tipsParams.gravity = Gravity.TOP;
-            case TipsSiteMode.RIGHT:
+            case TipsLayoutSiteMode.RIGHT:
             default:
                 tipsParams.gravity = Gravity.END;
                 break;
-            case TipsSiteMode.BOTTOM:
+            case TipsLayoutSiteMode.BOTTOM:
                 tipsParams.gravity = Gravity.BOTTOM;
                 break;
-            case TipsSiteMode.CENTER:
+            case TipsLayoutSiteMode.CENTER:
                 tipsParams.gravity = Gravity.CENTER;
         }
 

@@ -23,54 +23,54 @@ import com.wkz.bannerlayout.animation.ZoomInTransformer;
 import com.wkz.bannerlayout.animation.ZoomOutPageTransformer;
 import com.wkz.bannerlayout.animation.ZoomOutSlideTransformer;
 import com.wkz.bannerlayout.animation.ZoomOutTranformer;
-import com.wkz.bannerlayout.annotation.AnimationMode;
+import com.wkz.bannerlayout.annotation.PageTransformerMode;
 
 public class TransformerUtils {
 
     @NonNull
     public static BannerTransformer getTransformer(int type) {
-        @AnimationMode
+        @PageTransformerMode
         int transformerType = type;
         switch (transformerType) {
-            case AnimationMode.ANIMATION_ACCORDION:
+            case PageTransformerMode.ANIMATION_ACCORDION:
                 return new AccordionTransformer();
-            case AnimationMode.ANIMATION_BACKGROUND:
+            case PageTransformerMode.ANIMATION_BACKGROUND:
                 return new BackgroundToForegroundTransformer();
-            case AnimationMode.ANIMATION_CUBE_IN:
+            case PageTransformerMode.ANIMATION_CUBE_IN:
                 return new CubeInTransformer();
-            case AnimationMode.ANIMATION_CUBE_OUT:
+            case PageTransformerMode.ANIMATION_CUBE_OUT:
                 return new CubeOutTransformer();
-            case AnimationMode.ANIMATION_DEFAULT:
+            case PageTransformerMode.ANIMATION_DEFAULT:
                 return new DefaultTransformer();
-            case AnimationMode.ANIMATION_DEPTH_PAGE:
+            case PageTransformerMode.ANIMATION_DEPTH_PAGE:
                 return new DepthPageTransformer();
-            case AnimationMode.ANIMATION_DRAWER:
+            case PageTransformerMode.ANIMATION_DRAWER:
                 return new DrawerTransformer();
-            case AnimationMode.ANIMATION_FLIPHORIZONTAL:
+            case PageTransformerMode.ANIMATION_FLIPHORIZONTAL:
                 return new FlipHorizontalTransformer();
-            case AnimationMode.ANIMATION_FLIPVERTICAL:
+            case PageTransformerMode.ANIMATION_FLIPVERTICAL:
                 return new FlipVerticalTransformer();
-            case AnimationMode.ANIMATION_FOREGROUND:
+            case PageTransformerMode.ANIMATION_FOREGROUND:
                 return new ForegroundToBackgroundTransformer();
-            case AnimationMode.ANIMATION_ROTATEDOWN:
+            case PageTransformerMode.ANIMATION_ROTATEDOWN:
                 return new RotateDownTransformer();
-            case AnimationMode.ANIMATION_ROTATEUP:
+            case PageTransformerMode.ANIMATION_ROTATEUP:
                 return new RotateUpTransformer();
-            case AnimationMode.ANIMATION_SCALEINOUT:
+            case PageTransformerMode.ANIMATION_SCALEINOUT:
                 return new ScaleInOutTransformer();
-            case AnimationMode.ANIMATION_STACK:
+            case PageTransformerMode.ANIMATION_STACK:
                 return new StackTransformer();
-            case AnimationMode.ANIMATION_TABLET:
+            case PageTransformerMode.ANIMATION_TABLET:
                 return new TabletTransformer();
-            case AnimationMode.ANIMATION_VERTICAL:
+            case PageTransformerMode.ANIMATION_VERTICAL:
                 return new VerticalTransformer();
-            case AnimationMode.ANIMATION_ZOOMIN:
+            case PageTransformerMode.ANIMATION_ZOOMIN:
                 return new ZoomInTransformer();
-            case AnimationMode.ANIMATION_ZOOMOUTPAGE:
+            case PageTransformerMode.ANIMATION_ZOOMOUTPAGE:
                 return new ZoomOutPageTransformer();
-            case AnimationMode.ANIMATION_ZOOMOUTSLIDE:
+            case PageTransformerMode.ANIMATION_ZOOMOUTSLIDE:
                 return new ZoomOutSlideTransformer();
-            case AnimationMode.ANIMATION_ZOOMOUT:
+            case PageTransformerMode.ANIMATION_ZOOMOUT:
                 return new ZoomOutTranformer();
             default:
                 return new DefaultTransformer();

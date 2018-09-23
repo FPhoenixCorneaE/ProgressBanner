@@ -7,14 +7,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @IntDef({
-        TipsSiteMode.LEFT,
-        TipsSiteMode.TOP,
-        TipsSiteMode.RIGHT,
-        TipsSiteMode.BOTTOM,
-        TipsSiteMode.CENTER
+        TipsLayoutSiteMode.LEFT,
+        TipsLayoutSiteMode.TOP,
+        TipsLayoutSiteMode.RIGHT,
+        TipsLayoutSiteMode.BOTTOM,
+        TipsLayoutSiteMode.CENTER
 })
 @Retention(RetentionPolicy.CLASS)
-public @interface TipsSiteMode {
+public @interface TipsLayoutSiteMode {
     int LEFT = RelativeLayout.ALIGN_PARENT_LEFT;
     int TOP = RelativeLayout.ALIGN_PARENT_TOP;
     int RIGHT = RelativeLayout.ALIGN_PARENT_RIGHT;

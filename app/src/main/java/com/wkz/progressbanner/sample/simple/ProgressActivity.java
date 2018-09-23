@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.wkz.bannerlayout.annotation.ProgressShapeMode;
 import com.wkz.bannerlayout.widget.ProgressDrawable;
 import com.wkz.progressbanner.R;
 
@@ -44,13 +45,14 @@ public class ProgressActivity extends AppCompatActivity implements View.OnClickL
     private void initView() {
         mIvProgress = (ImageView) findViewById(R.id.iv_progress);
         mIvProgress.setImageDrawable(mProgressDrawable = new ProgressDrawable.Builder(mContext)
-                .setWidth(300f)
-                .setHeight(4f)
+                .setWidth(100f)
+                .setHeight(100f)
                 .setDuration(3000)
                 .setBackgroundColor(Color.RED)
                 .setProgressColor(Color.GREEN)
                 .setRadius(10f)
                 .setAnimated(true)
+                .setShapeMode(ProgressShapeMode.RING)
                 .setAnimatorListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {

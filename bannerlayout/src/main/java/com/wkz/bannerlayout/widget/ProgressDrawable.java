@@ -15,6 +15,8 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.view.animation.LinearInterpolator;
 
+import com.wkz.bannerlayout.annotation.ProgressShapeMode;
+
 public class ProgressDrawable extends Drawable implements Animatable {
 
     private float mWidth;
@@ -25,6 +27,9 @@ public class ProgressDrawable extends Drawable implements Animatable {
     @ColorInt
     private int mProgressColor;
     private float mRadius;
+    @ProgressShapeMode
+    private int mShapeMode;
+    private float mRingThickness;
 
     private Paint mPaint;
     private ValueAnimator mAnimator;
@@ -33,17 +38,20 @@ public class ProgressDrawable extends Drawable implements Animatable {
     private Context mContext;
     private boolean mIsAnimated;
     private float mProgressWidth;
+    private float mProgress;
 
     private ProgressDrawable(Builder builder) {
         this.mContext = builder.mContext;
+        this.mAnimatorListener = builder.mAnimatorListener;
+        this.mIsAnimated = builder.mIsAnimated;
         this.mWidth = builder.mWidth;
         this.mHeight = builder.mHeight;
         this.mDuration = builder.mDuration;
         this.mBackgroundColor = builder.mBackgroundColor;
         this.mProgressColor = builder.mProgressColor;
         this.mRadius = builder.mRadius;
-        this.mIsAnimated = builder.mIsAnimated;
-        this.mAnimatorListener = builder.mAnimatorListener;
+        this.mShapeMode = builder.mShapeMode;
+        this.mRingThickness = builder.mRingThickness;
 
         init();
     }
@@ -53,6 +61,8 @@ public class ProgressDrawable extends Drawable implements Animatable {
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setAntiAlias(true);
+
+        //是否动画
         if (mIsAnimated) {
             // 设置属性动画参数
             mAnimator = new ValueAnimator();
@@ -65,7 +75,8 @@ public class ProgressDrawable extends Drawable implements Animatable {
             mAnimatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    calculateProgressWidth((float) animation.getAnimatedValue());
+                    mProgress = (float) animation.getAnimatedValue();
+                    calculateProgressWidth();
                     invalidateSelf();
                 }
             };
@@ -101,6 +112,7 @@ public class ProgressDrawable extends Drawable implements Animatable {
     public void end() {
         if (mAnimator != null) {
             mAnimator.end();
+            mProgress = 0;
             mProgressWidth = 0;
             invalidateSelf();
         }
@@ -113,16 +125,31 @@ public class ProgressDrawable extends Drawable implements Animatable {
 
     @Override
     public void draw(@NonNull Canvas canvas) {
-        // 绘制背景
-        mPaint.setColor(mBackgroundColor);
-        canvas.drawRoundRect(new RectF(0, 0, mWidth, mHeight),
-                mRadius, mRadius, mPaint);
-
-        // 绘制进度
-        if (mIsAnimated) {
-            mPaint.setColor(mProgressColor);
-            canvas.drawRoundRect(new RectF(0, 0, mProgressWidth, mHeight),
+        if (ProgressShapeMode.RECTANGLE == mShapeMode) {
+            // 绘制背景
+            mPaint.setColor(mBackgroundColor);
+            canvas.drawRoundRect(new RectF(0, 0, mWidth, mHeight),
                     mRadius, mRadius, mPaint);
+
+            // 绘制进度
+            if (mIsAnimated) {
+                mPaint.setColor(mProgressColor);
+                canvas.drawRoundRect(new RectF(0, 0, mProgressWidth, mHeight),
+                        mRadius, mRadius, mPaint);
+            }
+        } else if (ProgressShapeMode.RING == mShapeMode) {
+            // 绘制背景
+            mPaint.setColor(mBackgroundColor);
+            canvas.drawCircle(mWidth / 2, mHeight / 2, mWidth / 2, mPaint);
+
+            // 绘制进度
+            mPaint.setColor(mProgressColor);
+            canvas.drawArc(new RectF(0, 0, mWidth, mHeight),
+                    -90, 360 * mProgress, true, mPaint);
+
+            // 绘制空心圆
+            mPaint.setColor(Color.WHITE);
+            canvas.drawCircle(mWidth / 2, mHeight / 2, mWidth / 2 - mRingThickness, mPaint);
         }
     }
 
@@ -141,31 +168,41 @@ public class ProgressDrawable extends Drawable implements Animatable {
         return PixelFormat.TRANSLUCENT;
     }
 
-    // 获取默认的高度
+    /**
+     * 获取默认的高度
+     */
     @Override
     public int getIntrinsicHeight() {
         return (int) this.mHeight;
     }
 
-    // 获取默认的宽度
+    /**
+     * 获取默认的宽度
+     */
     @Override
     public int getIntrinsicWidth() {
         return (int) this.mWidth;
     }
 
-    private void calculateProgressWidth(float animatedValue) {
-        this.mProgressWidth = mWidth * animatedValue;
+    private void calculateProgressWidth() {
+        this.mProgressWidth = mWidth * mProgress;
     }
 
     public static class Builder {
 
+        private static final boolean DEFAULT_IS_ANIMATED = true;
         private static final float DEFAULT_WIDTH = 50.0F;
         private static final float DEFAULT_HEIGHT = 2.5F;
         private static final long DEFAULT_DURATION = 3000;
         private static final int DEFAULT_BACKGROUND_COLOR = Color.RED;
         private static final int DEFAULT_PROGRESS_COLOR = Color.WHITE;
+        private static final float DEFAULT_RADIUS = 10F;
+        private static final int DEFAULT_SHAPE_MODE = ProgressShapeMode.RECTANGLE;
+        private static final float DEFAULT_RING_THICKNESS = 2.5F;
 
         private Context mContext;
+        private Animator.AnimatorListener mAnimatorListener;
+        private boolean mIsAnimated;
         private float mWidth;
         private float mHeight;
         private long mDuration;
@@ -174,16 +211,39 @@ public class ProgressDrawable extends Drawable implements Animatable {
         @ColorInt
         private int mProgressColor;
         private float mRadius;
-        private boolean mIsAnimated;
-        private Animator.AnimatorListener mAnimatorListener;
+        @ProgressShapeMode
+        private int mShapeMode;
+        private float mRingThickness;
 
         public Builder(Context mContext) {
             this.mContext = mContext;
+            this.mIsAnimated = DEFAULT_IS_ANIMATED;
             this.mWidth = dp2px(DEFAULT_WIDTH);
             this.mHeight = dp2px(DEFAULT_HEIGHT);
+            this.mDuration = DEFAULT_DURATION;
             this.mBackgroundColor = DEFAULT_BACKGROUND_COLOR;
             this.mProgressColor = DEFAULT_PROGRESS_COLOR;
-            this.mDuration = DEFAULT_DURATION;
+            this.mRadius = dp2px(DEFAULT_RADIUS);
+            this.mShapeMode = DEFAULT_SHAPE_MODE;
+            this.mRingThickness = dp2px(DEFAULT_RING_THICKNESS);
+        }
+
+        public boolean isAnimated() {
+            return mIsAnimated;
+        }
+
+        public Builder setAnimated(boolean mIsAnimated) {
+            this.mIsAnimated = mIsAnimated;
+            return this;
+        }
+
+        public Animator.AnimatorListener getAnimatorListener() {
+            return mAnimatorListener;
+        }
+
+        public Builder setAnimatorListener(Animator.AnimatorListener mAnimatorListener) {
+            this.mAnimatorListener = mAnimatorListener;
+            return this;
         }
 
         public float getWidth() {
@@ -240,21 +300,21 @@ public class ProgressDrawable extends Drawable implements Animatable {
             return this;
         }
 
-        public boolean isAnimated() {
-            return mIsAnimated;
+        public int getShapeMode() {
+            return mShapeMode;
         }
 
-        public Builder setAnimated(boolean mIsAnimated) {
-            this.mIsAnimated = mIsAnimated;
+        public Builder setShapeMode(@ProgressShapeMode int mShapeMode) {
+            this.mShapeMode = mShapeMode;
             return this;
         }
 
-        public Animator.AnimatorListener getAnimatorListener() {
-            return mAnimatorListener;
+        public float getRingThickness() {
+            return mRingThickness;
         }
 
-        public Builder setAnimatorListener(Animator.AnimatorListener mAnimatorListener) {
-            this.mAnimatorListener = mAnimatorListener;
+        public Builder setRingThickness(float mRingThickness) {
+            this.mRingThickness = mRingThickness;
             return this;
         }
 
