@@ -68,7 +68,7 @@ public class BannerAdapter extends PagerAdapter {
                     .placeholder(placeImage)
                     .error(errorImage)
                     .centerCrop();
-            this.imageLoaderManage = (new ImageDisplayManager() {
+            this.imageLoaderManage = new ImageDisplayManager() {
                 @NonNull
                 public ImageView display(@NonNull ViewGroup container, @NonNull BannerModelCallBack model) {
                     ImageView imageView = new ImageView(container.getContext());
@@ -78,7 +78,7 @@ public class BannerAdapter extends PagerAdapter {
                             .into(imageView);
                     return imageView;
                 }
-            });
+            };
         } else {
             this.imageLoaderManage = imageLoaderManage;
         }

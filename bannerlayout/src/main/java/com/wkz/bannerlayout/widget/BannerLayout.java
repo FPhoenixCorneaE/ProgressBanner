@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.wkz.bannerlayout.animation.BannerTransformer;
+import com.wkz.bannerlayout.annotation.PageTransformerMode;
 import com.wkz.bannerlayout.listener.BannerModelCallBack;
 import com.wkz.bannerlayout.listener.ImageDisplayManager;
 import com.wkz.bannerlayout.listener.OnBannerChangeListener;
@@ -292,6 +293,12 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
         return this;
     }
 
+    /**
+     * 是否开始循环Banner
+     *
+     * @param isStartRotation true为开始循环
+     * @return
+     */
     @NonNull
     public final BannerLayout startRotation(boolean isStartRotation) {
         this.isStartRotation = isStartRotation;
@@ -483,7 +490,7 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
     }
 
     @NonNull
-    public final BannerLayout setBannerTransformer(int type) {
+    public final BannerLayout setBannerTransformer(@PageTransformerMode int type) {
         this.setBannerTransformer(TransformerUtils.getTransformer(type));
         return this;
     }
@@ -851,14 +858,24 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
         return this.pageNumViewBackgroundColor;
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        clearBanner();
+    }
+
+    /**
+     * 释放资源
+     *
+     * @return
+     */
     @NonNull
     public final BannerLayout clearBanner() {
-        this.clearViewPager();
-        this.clearHandler();
-        this.clearBannerTipLayout();
-        this.clearTransformerList();
-        this.clearPageView();
-        return this;
+        return this.clearViewPager()
+                .clearHandler()
+                .clearBannerTipLayout()
+                .clearTransformerList()
+                .clearPageView();
     }
 
     @NonNull
@@ -931,8 +948,7 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
     }
 
     public BannerLayout(@NonNull Context context) {
-        super(context);
-        this.init();
+        this(context, null);
     }
 
     public BannerLayout(@NonNull Context context, @Nullable AttributeSet attrs) {

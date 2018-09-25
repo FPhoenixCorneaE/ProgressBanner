@@ -44,16 +44,16 @@ public final class ImageManagerActivity extends AppCompatActivity {
                 .startRotation(true);
     }
 
-    protected void onDestroy() {
-        super.onDestroy();
-        BannerLayout var10000 = this.frescoBanner;
-
-        var10000.clearBanner();
-        var10000 = this.imageLoaderBanner;
-
-        var10000.clearBanner();
-        var10000 = this.picassoBanner;
-
-        var10000.clearBanner();
-    }
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        BannerLayout var10000 = this.frescoBanner;
+//
+//        var10000.clearBanner();
+//        var10000 = this.imageLoaderBanner;
+//
+//        var10000.clearBanner();
+//        var10000 = this.picassoBanner;
+//
+//        var10000.clearBanner();
+//    }
 }
