@@ -103,6 +103,7 @@ public final class BannerDefaults {
     /**
      * this is progressDrawable default setting
      */
+    public static final boolean IS_VISIBLE_PROGRESSES = false;
     public static final float PROGRESSES_LEFT_MARGIN = 2.5F;
     public static final float PROGRESSES_RIGHT_MARGIN = 2.5F;
     public static final int PROGRESSES_SITE = RelativeLayout.CENTER_IN_PARENT;

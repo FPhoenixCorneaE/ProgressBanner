@@ -19,7 +19,7 @@ public final class Issues12Activity extends AppCompatActivity {
         this.bannerLayout = (BannerLayout)var10001;
         BannerLayout var10000 = this.bannerLayout;
 
-        var10000.initPageNumView().initTips().setTipsDotsSelector(R.drawable.bl_selector_dots).setPageNumViewMargin(12, 12, 12, 12).initListResources(SimpleData.initModel()).switchBanner(true);
+        var10000.initPageNumView().initTips().setTipsDotsSelector(R.drawable.bl_selector_dots).setPageNumViewMargin(12, 12, 12, 12).initListResources(SimpleData.initModel()).startRotation(true);
     }
 
     protected void onDestroy() {

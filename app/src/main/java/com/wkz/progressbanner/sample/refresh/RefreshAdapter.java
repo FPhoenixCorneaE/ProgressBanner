@@ -63,7 +63,7 @@ public final class RefreshAdapter extends RecyclerView.Adapter {
                         .setProgressesSite(RelativeLayout.CENTER_HORIZONTAL)
                         .initListResources(this.bannerModels)
                         .setDelayTime(3000)
-                        .switchBanner(true)
+                        .startRotation(true)
                         .setOnBannerClickListener((OnBannerClickListener) (new OnBannerClickListener() {
                             public void onBannerClick(@NonNull View view, int position, @NonNull BannerModelCallBack model) {
                                 Toast.makeText(view.getContext(), (CharSequence) model.getBannerTitle(), Toast.LENGTH_LONG).show();
@@ -77,12 +77,12 @@ public final class RefreshAdapter extends RecyclerView.Adapter {
                         }));
                 viewHolder.getStart().setOnClickListener((View.OnClickListener) (new View.OnClickListener() {
                     public final void onClick(View it) {
-                        viewHolder.getBannerLayout().switchBanner(true);
+                        viewHolder.getBannerLayout().startRotation(true);
                     }
                 }));
                 viewHolder.getStop().setOnClickListener((View.OnClickListener) (new View.OnClickListener() {
                     public final void onClick(View it) {
-                        viewHolder.getBannerLayout().switchBanner(false);
+                        viewHolder.getBannerLayout().startRotation(false);
                     }
                 }));
                 viewHolder.getUpdate().setOnClickListener((View.OnClickListener) (new View.OnClickListener() {

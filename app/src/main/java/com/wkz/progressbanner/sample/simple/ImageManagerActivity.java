@@ -31,17 +31,17 @@ public final class ImageManagerActivity extends AppCompatActivity {
 
         var10000.setImageLoaderManager((ImageDisplayManager) (new FrescoImageManager()))
                 .initListResources(SimpleData.initModel())
-                .switchBanner(true);
+                .startRotation(true);
         var10000 = this.imageLoaderBanner;
 
         var10000.setImageLoaderManager((ImageDisplayManager) (new ImageLoaderManager()))
                 .initListResources(SimpleData.initModel())
-                .switchBanner(false);
+                .startRotation(false);
         var10000 = this.picassoBanner;
 
         var10000.setImageLoaderManager((ImageDisplayManager) (new PicassoImageManager()))
                 .initListResources(SimpleData.initModel())
-                .switchBanner(true);
+                .startRotation(true);
     }
 
     protected void onDestroy() {

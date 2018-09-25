@@ -35,7 +35,7 @@ public class SimpleJavaActivity extends AppCompatActivity {
                 .initPageNumView()
                 .initTips()
                 .initListResources(list)
-                .switchBanner(true);
+                .startRotation(true);
     }
 
 

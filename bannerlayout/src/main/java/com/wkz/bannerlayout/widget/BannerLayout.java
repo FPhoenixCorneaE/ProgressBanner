@@ -149,11 +149,12 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
         this.pageNumViewTextSize = BannerDefaults.PAGE_NUM_VIEW_SIZE;
         this.pageNumViewMark = BannerDefaults.PAGE_NUM_VIEW_MARK;
 
+        this.isVisibleProgresses = BannerDefaults.IS_VISIBLE_PROGRESSES;
         this.progressLeftMargin = BannerDefaults.PROGRESSES_LEFT_MARGIN;
         this.progressRightMargin = BannerDefaults.PROGRESSES_RIGHT_MARGIN;
         this.progressSite = BannerDefaults.PROGRESSES_SITE;
-        this.progressBuilder = new ProgressDrawable.Builder(getContext())
-                .setAnimated(true)
+        this.progressBuilder = new ProgressDrawable
+                .Builder(getContext())
                 .setDuration(this.mDuration);
     }
 
@@ -292,7 +293,7 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
     }
 
     @NonNull
-    public final BannerLayout switchBanner(boolean isStartRotation) {
+    public final BannerLayout startRotation(boolean isStartRotation) {
         this.isStartRotation = isStartRotation;
         if (this.bannerHandlerUtils != null) {
             this.bannerHandlerUtils.removeCallbacksAndMessages(null);
@@ -642,7 +643,6 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
         this.bannerHandlerUtils = new BannerHandlerUtils(this, currentItem);
         this.bannerHandlerUtils.setDelayTime(this.delayTime);
 
-        this.switchBanner(this.isStartRotation);
         if (this.pageView != null) {
             this.pageView.setText(TextUtils.concat(String.valueOf(1), this.pageNumViewMark, String.valueOf(this.getDotsSize())));
         }

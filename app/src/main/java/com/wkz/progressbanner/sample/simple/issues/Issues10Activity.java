@@ -61,7 +61,7 @@ public final class Issues10Activity extends AppCompatActivity {
         BannerLayout var10000 = this.bannerlnstagram;
         
 
-        var10000.setPageNumViewMargin(10).initPageNumView().initListResources(data).setDelayTime(1000).switchBanner(false);
+        var10000.setPageNumViewMargin(10).initPageNumView().initListResources(data).setDelayTime(1000).startRotation(false);
         this.sizelnstagram = data.size();
         LinearLayout var6 = this.linearLayout;
         
@@ -131,7 +131,7 @@ public final class Issues10Activity extends AppCompatActivity {
 
         BannerLayout var6 = this.bannerLayout;
 
-        var6.setPageNumViewMargin(10).setDotsSite(13).setDotsWidthAndHeight(dotWidthAndHeight, dotWidthAndHeight).setDotsMargin(dotMargin).initTips().initPageNumView().initListResources(SimpleData.data()).switchBanner(true);
+        var6.setPageNumViewMargin(10).setDotsSite(13).setDotsWidthAndHeight(dotWidthAndHeight, dotWidthAndHeight).setDotsMargin(dotMargin).initTips().initPageNumView().initListResources(SimpleData.data()).startRotation(true);
         this.findViewById(R.id.btn_alter_count).setOnClickListener((View.OnClickListener)(new View.OnClickListener() {
             public final void onClick(View it) {
                 Issues10Activity.this.alterBannerCount();
@@ -148,13 +148,13 @@ public final class Issues10Activity extends AppCompatActivity {
             var10000 = this.bannerLayout;
             
 
-            var10000.initTips(false, false,false, false).initListResources(alterData).switchBanner(false);
+            var10000.initTips(false, false,false, false).initListResources(alterData).startRotation(false);
             Toast.makeText((Context)this, (CharSequence)"size <=1 , stopBanner , not show tipsLayout", Toast.LENGTH_SHORT).show();
         } else {
             var10000 = this.bannerLayout;
             
 
-            var10000.initTips(true, true,true, true).initListResources(alterData).switchBanner(true);
+            var10000.initTips(true, true,true, true).initListResources(alterData).startRotation(true);
             Toast.makeText((Context)this, (CharSequence)"size >1 , startBanner , show tipsLayout", Toast.LENGTH_SHORT).show();
         }
 

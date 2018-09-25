@@ -40,7 +40,7 @@ public class SimpleActivity extends AppCompatActivity implements OnBannerClickLi
                 .setTipsDotsSelector(R.drawable.bl_selector_dots)
                 .setPageNumViewMargin(12, 12, 12, 12)
                 .initListResources(SimpleData.initModel())
-                .switchBanner(true)
+                .startRotation(true)
                 .setOnBannerClickListener(this);
 
         this.customizeBanner.initPageNumView()
@@ -51,7 +51,7 @@ public class SimpleActivity extends AppCompatActivity implements OnBannerClickLi
                 .setPageNumViewTextColor(ContextCompat.getColor(this.getApplicationContext(), R.color.colorAccent))
                 .setDotsSite(RelativeLayout.CENTER_IN_PARENT)
                 .initListResources(ArrayUtils.initArrayResources(this.image, this.title))
-                .switchBanner(true)
+                .startRotation(true)
                 .setOnBannerClickListener(this)
                 .addOnPageChangeListener((new OnBannerChangeListener() {
                     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -68,7 +68,7 @@ public class SimpleActivity extends AppCompatActivity implements OnBannerClickLi
                 .initTips(true, true, true, true)
                 .setOnBannerClickListener(this)
                 .initListResources(SimpleData.initModel())
-                .switchBanner(true);
+                .startRotation(true);
     }
 
     protected void onDestroy() {

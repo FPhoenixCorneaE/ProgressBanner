@@ -31,7 +31,7 @@ public final class TransformerActivity extends AppCompatActivity {
         var10000.setText((CharSequence)"select position:0");
         BannerLayout var3 = this.transformerBanner;
 
-        var3.setBannerTransformer(0).setDelayTime(300).initListResources(SimpleData.initModel()).switchBanner(true).addOnPageChangeListener((OnBannerChangeListener)(new OnBannerChangeListener() {
+        var3.setBannerTransformer(0).setDelayTime(300).initListResources(SimpleData.initModel()).startRotation(true).addOnPageChangeListener((OnBannerChangeListener)(new OnBannerChangeListener() {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 
