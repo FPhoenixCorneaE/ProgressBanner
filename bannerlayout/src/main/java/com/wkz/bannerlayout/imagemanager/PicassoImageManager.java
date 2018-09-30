@@ -5,9 +5,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-import com.wkz.bannerlayout.R;
 import com.wkz.bannerlayout.listener.BannerModelCallBack;
 import com.wkz.bannerlayout.listener.ImageDisplayManager;
+import com.wkz.bannerlayout.widget.BannerDefaults;
 
 public class PicassoImageManager implements ImageDisplayManager {
     @NonNull
@@ -15,8 +15,8 @@ public class PicassoImageManager implements ImageDisplayManager {
         ImageView imageView = new ImageView(container.getContext());
         Picasso.get()
                 .load((String) model.getBannerUrl())
-                .placeholder(R.drawable.bl_drawable_holder)
-                .error(R.drawable.bl_drawable_holder)
+                .placeholder(BannerDefaults.GLIDE_PLACEHOLDER_DRAWABLE)
+                .error(BannerDefaults.GLIDE_ERROR_DRAWABLE)
                 .into(imageView);
         return imageView;
     }

@@ -7,9 +7,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.wkz.bannerlayout.R;
 import com.wkz.bannerlayout.listener.BannerModelCallBack;
 import com.wkz.bannerlayout.listener.ImageDisplayManager;
+import com.wkz.bannerlayout.widget.BannerDefaults;
 
 public class GlideImageManager implements ImageDisplayManager {
 
@@ -21,9 +21,9 @@ public class GlideImageManager implements ImageDisplayManager {
         Glide.with(imageView.getContext())
                 .applyDefaultRequestOptions(
                         this.requestOptions
-                                .placeholder(R.drawable.bl_drawable_holder)
-                                .error(R.drawable.bl_drawable_holder)
-                                .fallback(R.drawable.bl_drawable_holder)
+                                .placeholder(BannerDefaults.GLIDE_PLACEHOLDER_DRAWABLE)
+                                .error(BannerDefaults.GLIDE_ERROR_DRAWABLE)
+                                .fallback(BannerDefaults.GLIDE_ERROR_DRAWABLE)
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 )
                 .load(model.getBannerUrl())

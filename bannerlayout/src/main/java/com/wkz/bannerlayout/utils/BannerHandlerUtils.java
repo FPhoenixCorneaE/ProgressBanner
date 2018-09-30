@@ -56,6 +56,5 @@ public class BannerHandlerUtils extends Handler {
         super();
         this.mCurrent = mCurrent;
         this.page = page;
-        this.delayTime = 2000L;
     }
 }

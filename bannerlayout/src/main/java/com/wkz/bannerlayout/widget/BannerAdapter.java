@@ -1,5 +1,6 @@
 package com.wkz.bannerlayout.widget;
 
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -59,14 +60,14 @@ public class BannerAdapter extends PagerAdapter {
         this.imageClickListener = imageClickListener;
     }
 
-    public BannerAdapter(@NonNull List imageList, @Nullable ImageDisplayManager imageLoaderManage, int errorImage, int placeImage, boolean isGuide) {
+    public BannerAdapter(@NonNull List imageList, @Nullable ImageDisplayManager imageLoaderManage, Drawable errorDrawable, Drawable placeholderDrawable, boolean isGuide) {
         super();
         this.imageList = imageList;
         this.isGuide = isGuide;
         if (imageLoaderManage == null) {
             final RequestOptions requestOptions = new RequestOptions()
-                    .placeholder(placeImage)
-                    .error(errorImage)
+                    .placeholder(placeholderDrawable)
+                    .error(errorDrawable)
                     .centerCrop();
             this.imageLoaderManage = new ImageDisplayManager() {
                 @NonNull

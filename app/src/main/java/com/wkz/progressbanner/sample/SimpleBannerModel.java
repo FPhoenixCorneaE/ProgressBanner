@@ -1,4 +1,4 @@
-package com.wkz.progressbanner.sample.bean;
+package com.wkz.progressbanner.sample;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -34,9 +34,8 @@ public class SimpleBannerModel implements BannerModelCallBack {
         return String.valueOf(this.image);
     }
 
-    @NonNull
     public String getBannerTitle() {
-        return String.valueOf(this.title);
+        return this.title;
     }
 
     public SimpleBannerModel(@NonNull Object image) {

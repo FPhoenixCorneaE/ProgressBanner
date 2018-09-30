@@ -19,18 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".sample.simple.RefreshActivity" />
-        <activity android:name=".sample.simple.SimpleActivity" />
-        <activity
-            android:name=".sample.simple.SimpleGuideActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".sample.simple.ImageManagerActivity" />
-        <activity android:name=".sample.simple.TransformerActivity" />
-        <activity android:name=".sample.simple.MethodTestActivity" />
-        <activity android:name=".sample.simple.issues.Issues10Activity" />
-        <activity android:name=".sample.simple.issues.Issues12Activity" />
-        <activity android:name=".sample.simple.SimpleJavaActivity" />
-        <activity android:name=".sample.simple.ProgressActivity"/>
     </application>
 
 </manifest>

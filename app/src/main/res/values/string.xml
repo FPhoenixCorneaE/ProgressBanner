@@ -14,9 +14,10 @@
         <item>FOREGROUND</item>
         <item>ROTATEDOWN</item>
         <item>ROTATEUP</item>
-        <item>STACK</item>
         <item>SCALEINOUT</item>
+        <item>STACK</item>
         <item>TABLET</item>
+        <item>VERTICAL</item>
         <item>ZOOMIN</item>
         <item>ZOOMOUTPAGE</item>
         <item>ZOOMOUTSLIDE</item>
