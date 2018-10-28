@@ -110,3 +110,5 @@ mBlBanner.startRotation(false);
 mBlBanner.initListResources(ImageData.updateImages());
 ```
 
+
+参考自：https://github.com/7449/BannerLayout
