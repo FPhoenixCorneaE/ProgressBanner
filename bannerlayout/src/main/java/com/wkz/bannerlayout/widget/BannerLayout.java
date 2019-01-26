@@ -390,6 +390,11 @@ public final class BannerLayout extends FrameLayout implements ViewPagerCurrent,
                 this.bannerHandlerUtils.sendEmptyMessage(BannerHandlerUtils.MSG_KEEP);
                 this.bannerHandlerUtils.removeCallbacksAndMessages(null);
             }
+            if (this.isVisibleProgresses) {
+                if (this.bannerTipLayout != null) {
+                    this.bannerTipLayout.stopProgresses(preEnablePosition);
+                }
+            }
         }
 
         return this;

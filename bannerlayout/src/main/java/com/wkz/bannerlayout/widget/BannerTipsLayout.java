@@ -152,7 +152,18 @@ public final class BannerTipsLayout extends RelativeLayout {
                 ((ProgressDrawable) newChildAt.getBackground()).start();
             }
         }
+    }
 
+    /**
+     * stop the Progress
+     */
+    public void stopProgresses(int position) {
+        View childAt = this.mProgressesContainer.getChildAt(position);
+        if (childAt != null) {
+            if (childAt.getBackground() instanceof ProgressDrawable) {
+                ((ProgressDrawable) childAt.getBackground()).stop();
+            }
+        }
     }
 
     /**
