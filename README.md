@@ -6,6 +6,29 @@
 ![图片预览](https://github.com/FPhoenixCorneaE/ProgressBanner/blob/master/preview/preview.gif)
 
 
+
+How to include it in your project:
+--------------
+**Step 1.** Add the JitPack repository to your build file
+```groovy
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+
+**Step 2.** Add the dependency
+```groovy
+dependencies {
+	implementation 'com.github.FPhoenixCorneaE:ProgressBanner:1.0.0'
+}
+```
+
+
+代码中使用
+-------------------------------
 ```kotlin
 private fun initData() {
         mBlBanner //初始化指示器显示与否
