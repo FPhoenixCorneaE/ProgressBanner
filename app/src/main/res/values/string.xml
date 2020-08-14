@@ -9,19 +9,20 @@
         <item>CUBE_OUT</item>
         <item>DEFAULT</item>
         <item>DEPTH_PAGE</item>
-        <item>FLIPHORIZONTAL</item>
-        <item>FLIPVERTICAL</item>
+        <item>DRAWER</item>
+        <item>FADE_OUT_FADE_IN</item>
+        <item>FLIP_HORIZONTAL</item>
+        <item>FLIP_VERTICAL</item>
         <item>FOREGROUND</item>
-        <item>ROTATEDOWN</item>
-        <item>ROTATEUP</item>
-        <item>SCALEINOUT</item>
+        <item>ROTATE_DOWN</item>
+        <item>ROTATE_UP</item>
+        <item>SCALE_IN_OUT</item>
         <item>STACK</item>
         <item>TABLET</item>
         <item>VERTICAL</item>
-        <item>ZOOMIN</item>
-        <item>ZOOMOUTPAGE</item>
-        <item>ZOOMOUTSLIDE</item>
-        <item>ZOOMOUT</item>
-        <item>DRAWER</item>
+        <item>ZOOM_IN</item>
+        <item>ZOOM_OUT_PAGE</item>
+        <item>ZOOM_OUT_SLIDE</item>
+        <item>ZOOM_OUT</item>
     </string-array>
 </resources>

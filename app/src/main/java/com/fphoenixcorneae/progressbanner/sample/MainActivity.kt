@@ -1,13 +1,57 @@
-# ProgressBanner
+package com.fphoenixcorneae.progressbanner.sample
 
-以进度条为指示器的Banner
-========================================
+import android.graphics.Color
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
+import com.fphoenixcorneae.bannerlayout.annotation.TipsDotsSiteMode
+import com.fphoenixcorneae.bannerlayout.annotation.TipsPageNumSiteMode
+import com.fphoenixcorneae.bannerlayout.annotation.TipsProgressesSiteMode
+import com.fphoenixcorneae.bannerlayout.annotation.TipsTitleSiteMode
+import com.fphoenixcorneae.bannerlayout.imagemanager.GlideImageManager
+import com.fphoenixcorneae.bannerlayout.listener.BannerModelCallBack
+import com.fphoenixcorneae.bannerlayout.listener.OnBannerClickListener
+import com.fphoenixcorneae.bannerlayout.listener.OnSimpleBannerChangeListener
+import com.fphoenixcorneae.bannerlayout.utils.DisplayUtils.dp2px
+import com.fphoenixcorneae.bannerlayout.widget.ProgressDrawable
+import com.fphoenixcorneae.progressbanner.R
+import kotlinx.android.synthetic.main.activity_main.*
 
-![图片预览](https://github.com/FPhoenixCorneaE/ProgressBanner/blob/master/preview/preview.gif)
+class MainActivity : AppCompatActivity(), View.OnClickListener, OnRefreshListener {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        initListener()
+        initData()
+    }
 
-```kotlin
-private fun initData() {
+    private fun initListener() {
+        mBtnStart.setOnClickListener(this)
+        mBtnStop.setOnClickListener(this)
+        mBtnUpdate.setOnClickListener(this)
+        mSpSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                if (position == 14) {
+                    mBlBanner.setVertical(true)
+                } else {
+                    mBlBanner.setVertical(false)
+                }
+                mBlBanner.setBannerTransformer(position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+        mSrlRefresh.setOnRefreshListener(this)
+    }
+
+    private fun initData() {
         mBlBanner //初始化指示器显示与否
                 .initTips(false, true, true, true)
                 //动画时间
@@ -19,7 +63,7 @@ private fun initData() {
                 //循环方向为垂直方向
 //                .setVertical(true)
                 //viewpager是否能翻页,true为不能,false为可以
-                .setViewPagerTouchMode(true)
+                .setViewPagerTouchMode(false)
                 //图片加载管理器
                 .setImageLoaderManager(GlideImageManager(dp2px(this, 8f)))
 //                .setImageLoaderManager(FrescoImageManager(DisplayUtils.dp2px(this, 8f)))
@@ -78,37 +122,34 @@ private fun initData() {
                 //是否开启循环
                 .startRotation(true)
     }
-```
------------------
 
-开启循环
--------
-```kotlin
-override fun onResume() {
-    super.onResume()
-    // 开启循环
-    mBlBanner.startRotation(true)
+    override fun onPause() {
+        super.onPause()
+        // 停止循环
+        mBlBanner.startRotation(false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // 开启循环
+        mBlBanner.startRotation(true)
+    }
+
+    override fun onClick(v: View) {
+        when (v) {
+            mBtnStart -> mBlBanner.startRotation(true)
+            mBtnStop -> mBlBanner.startRotation(false)
+            mBtnUpdate -> mBlBanner.initListResources(ImageData.updateImages())
+            else -> {
+            }
+        }
+    }
+
+    override fun onRefresh() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            mSrlRefresh.isRefreshing = false
+            mBlBanner.initListResources(ImageData.updateImages())
+                    .startRotation(true)
+        }, 1000)
+    }
 }
-```
---------------------------
-
-停止循环
--------------
-```kotlin
-override fun onPause() {
-    super.onPause()
-    // 停止循环
-    mBlBanner.startRotation(false)
-}
-```
------------------
-
-更新数据
----------------
-```kotlin
-mBlBanner.initListResources(ImageData.updateImages())
-        .startRotation(true)
-```
-
-
-参考自：https://github.com/7449/BannerLayout

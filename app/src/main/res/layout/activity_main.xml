@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/srl_refresh"
+    android:id="@+id/mSrlRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,17 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="185dp"
             android:layout_margin="15dp"
-            app:cardCornerRadius="5dp">
+            app:cardCornerRadius="8dp">
 
-            <com.wkz.bannerlayout.widget.BannerLayout
-                android:id="@+id/bl_banner"
+            <com.fphoenixcorneae.bannerlayout.widget.BannerLayout
+                android:id="@+id/mBlBanner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:showDividers="middle|beginning|end">
 
             <Button
-                android:id="@+id/btn_start"
+                android:id="@+id/mBtnStart"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -40,7 +40,7 @@
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
-                android:id="@+id/btn_stop"
+                android:id="@+id/mBtnStop"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -49,7 +49,7 @@
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
-                android:id="@+id/btn_update"
+                android:id="@+id/mBtnUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -59,7 +59,7 @@
         </LinearLayout>
 
         <Spinner
-            android:id="@+id/sp_spinner"
+            android:id="@+id/mSpSpinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="15dp"
@@ -67,4 +67,4 @@
             android:layout_marginEnd="15dp"
             android:entries="@array/transformer" />
     </FrameLayout>
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

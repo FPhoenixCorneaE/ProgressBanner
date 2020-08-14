@@ -12,3 +12,5 @@
 /gradle
 /gradlew.bat
 /gradlew
+/bannerlayout/src/test
+/bannerlayout/src/androidTest
